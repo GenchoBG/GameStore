@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using GameStore.Commands.AuthenticatedCommands;
 using GameStore.Commands.GuestCommands;
 using GameStore.Commands.Interfaces;
 using GameStore.Exceptions;
@@ -74,7 +75,8 @@ namespace GameStore
             this.commands = new Dictionary<string, ICommand>
             {
                 ["Register"] = new RegisterCommand(this),
-                ["Login"] = new LoginCommand(this)
+                ["Login"] = new LoginCommand(this),
+                ["Logout"] = new LogoutCommand(this)
             };
         }
 
