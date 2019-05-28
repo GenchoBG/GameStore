@@ -35,6 +35,7 @@ namespace GameStore
             {
                 try
                 {
+                    Console.Write($"{this.CurrentUsername ?? "Guest"}:~$ ");
                     var input = Console.ReadLine();
                     if (input.ToUpper() == "EXIT")
                     {
@@ -77,7 +78,8 @@ namespace GameStore
                 ["Register"] = new RegisterCommand(this),
                 ["Login"] = new LoginCommand(this),
                 ["Logout"] = new LogoutCommand(this),
-                ["ChangePassword"] = new ChangePasswordCommand(this)
+                ["ChangePassword"] = new ChangePasswordCommand(this),
+                ["DeleteAccount"] = new DeleteAccountCommand(this)
             };
         }
 

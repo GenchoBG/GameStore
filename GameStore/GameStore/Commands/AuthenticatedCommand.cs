@@ -12,7 +12,7 @@ namespace GameStore.Commands
         {
             if (!this.Engine.IsLoggedIn)
             {
-                throw new GameStoreException("You must be logged in to use this command.");
+                throw new GameStoreException("You must log out in order to use this command.");
             }
         }
 
