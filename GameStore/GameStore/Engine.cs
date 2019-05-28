@@ -74,6 +74,7 @@ namespace GameStore
             this.commands = new Dictionary<string, ICommand>
             {
                 ["Register"] = new RegisterCommand(this),
+                ["Login"] = new LoginCommand(this)
             };
         }
 
