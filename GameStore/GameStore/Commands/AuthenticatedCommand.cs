@@ -16,6 +16,6 @@ namespace GameStore.Commands
             }
         }
 
-        protected abstract override void ExecuteCore();
+        protected abstract override void ExecuteCore(string[] args);
     }
 }

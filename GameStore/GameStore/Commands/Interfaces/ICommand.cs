@@ -1,7 +1,7 @@
-﻿namespace FootballBetting.Commands
+﻿namespace GameStore.Commands.Interfaces
 {
     public interface ICommand
     {
-        void Execute();
+        void Execute(string[] args);
     }
 }

@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using FootballBetting.Commands;
+using System.Linq;
+using GameStore.Commands.GuestCommands;
+using GameStore.Commands.Interfaces;
+using GameStore.Exceptions;
 using MySql.Data.MySqlClient;
 
 namespace GameStore
@@ -29,13 +32,35 @@ namespace GameStore
         {
             while (true)
             {
-                var command = Console.ReadLine();
-                if (command == "EXIT")
+                try
                 {
-                    break;
+                    var input = Console.ReadLine();
+                    if (input.ToUpper() == "EXIT")
+                    {
+                        break;
+                    }
+
+                    var args = input.Split();
+
+                    var cmd = args[0];
+
+                    args = args.Skip(1).ToArray();
+
+                    if (!this.commands.ContainsKey(cmd))
+                    {
+                        throw new GameStoreException("Command not found.");
+                    }
+
+                    var command = this.commands[cmd];
+                    command.Execute(args);
                 }
-
-
+                catch (GameStoreException e)
+                {
+                    var @default = Console.ForegroundColor;
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine(e.Message);
+                    Console.ForegroundColor = @default;
+                }
             }
         }
 
@@ -46,10 +71,13 @@ namespace GameStore
 
         private void RegisterCommands()
         {
-            this.commands = new Dictionary<string, ICommand>();
+            this.commands = new Dictionary<string, ICommand>
+            {
+                ["Register"] = new RegisterCommand(this),
+            };
         }
 
-        private void InitialSetup()
+        private void InitialSetup() //TODO: don't drop the db on every startup
         {
             var query = @"DROP DATABASE IF EXISTS GameStore;
                             CREATE DATABASE GameStore CHARSET 'utf8';

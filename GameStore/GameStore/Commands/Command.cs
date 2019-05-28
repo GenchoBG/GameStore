@@ -1,4 +1,5 @@
-﻿using FootballBetting.Commands;
+﻿using System;
+using GameStore.Commands.Interfaces;
 
 namespace GameStore.Commands
 {
@@ -11,14 +12,22 @@ namespace GameStore.Commands
 
         protected Engine Engine { get; }
 
-        public void Execute()
+        public void Execute(string[] args)
         {
             this.Validate();
-            this.ExecuteCore();
+            this.ExecuteCore(args);
         }
 
         protected virtual void Validate() { }
 
-        protected abstract void ExecuteCore();
+        protected abstract void ExecuteCore(string[] args);
+
+        protected void WriteSuccessMessage(string message)
+        {
+            var @default = Console.ForegroundColor;
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine(message);
+            Console.ForegroundColor = @default;
+        }
     }
 }
