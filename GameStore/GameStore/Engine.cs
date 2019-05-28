@@ -57,12 +57,12 @@ namespace GameStore
 
                             CREATE TABLE Users(
 	                            Id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	                            Usermame VARCHAR(150) NOT NULL,
+	                            Username VARCHAR(150) NOT NULL,
 	                            Password VARCHAR(150) NOT NULL,
                                 Balance DOUBLE NOT NULL
                             );
 
-                            CREATE INDEX Index_User_Username ON Users (Usermame);
+                            CREATE INDEX Index_User_Username ON Users (Username);
 
                             CREATE TABLE Roles(
 	                            Id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -77,6 +77,30 @@ namespace GameStore
 	                            FOREIGN KEY (UserId) REFERENCES Users(Id),
 	                            FOREIGN KEY (RoleId) REFERENCES Roles(Id),
 	                            PRIMARY KEY (UserId, RoleId)
+                            );
+
+                            INSERT INTO Users(Id, Username, Password, Balance) VALUES(1, 'Manager', 'manager', 100);
+                            INSERT INTO Users(Id, Username, Password, Balance) VALUES(2, 'Pesho123', 'peshopesho', 0);
+
+                            INSERT INTO Roles(Id, Name) VALUES(1, 'manager');
+
+                            INSERT INTO UserRoles(UserId, RoleId) VALUES(1, 1);
+
+                            CREATE TABLE Games(
+	                            Id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	                            Name VARCHAR(150) NOT NULL,
+	                            Description VARCHAR(500) NOT NULL,
+                                Price DOUBLE NOT NULL
+                            );
+
+                            CREATE INDEX Index_Games_Name ON Games (Name);
+
+                            CREATE TABLE UserGames(
+	                            UserId INTEGER NOT NULL,
+	                            GameId INTEGER NOT NULL, 
+	                            FOREIGN KEY (UserId) REFERENCES Users(Id),
+	                            FOREIGN KEY (GameId) REFERENCES Games(Id),
+	                            PRIMARY KEY (UserId, GameId)
                             );";
 
             using (var cmd = new MySqlCommand(query, this.Connection))
