@@ -6,7 +6,7 @@ using MySql.Data.MySqlClient;
 
 namespace GameStore.Commands.AuthenticatedCommands
 {
-    class ChangePasswordCommand : AuthenticatedCommand
+    public class ChangePasswordCommand : AuthenticatedCommand
     {
         public ChangePasswordCommand(Engine engine) : base(engine)
         {

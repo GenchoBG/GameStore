@@ -6,7 +6,7 @@ using MySql.Data.MySqlClient;
 
 namespace GameStore.Commands.GuestCommands
 {
-    class LoginCommand : GuestCommand
+    public class LoginCommand : GuestCommand
     {
         public LoginCommand(Engine engine) : base(engine)
         {

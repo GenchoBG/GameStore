@@ -79,7 +79,8 @@ namespace GameStore
                 ["Login"] = new LoginCommand(this),
                 ["Logout"] = new LogoutCommand(this),
                 ["ChangePassword"] = new ChangePasswordCommand(this),
-                ["DeleteAccount"] = new DeleteAccountCommand(this)
+                ["DeleteAccount"] = new DeleteAccountCommand(this),
+                ["Deposit"] = new DepositCommand(this)
             };
         }
 

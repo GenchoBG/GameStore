@@ -4,7 +4,7 @@ using System.Text;
 
 namespace GameStore.Commands.AuthenticatedCommands
 {
-    class LogoutCommand : AuthenticatedCommand
+    public class LogoutCommand : AuthenticatedCommand
     {
         public LogoutCommand(Engine engine) : base(engine)
         {
