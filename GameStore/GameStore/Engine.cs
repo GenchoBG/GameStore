@@ -76,7 +76,8 @@ namespace GameStore
             {
                 ["Register"] = new RegisterCommand(this),
                 ["Login"] = new LoginCommand(this),
-                ["Logout"] = new LogoutCommand(this)
+                ["Logout"] = new LogoutCommand(this),
+                ["ChangePassword"] = new ChangePasswordCommand(this)
             };
         }
 
