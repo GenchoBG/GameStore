@@ -57,6 +57,8 @@ namespace GameStore.Commands.GuestCommands
             this.Engine.IsLoggedIn = true;
             this.Engine.CurrentUsername = username;
 
+            this.SetRoles();
+
             this.WriteSuccessMessage($"Welcome, {username}");
         }
     }

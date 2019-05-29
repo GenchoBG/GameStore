@@ -4,6 +4,7 @@ using System.Linq;
 using GameStore.Commands.AuthenticatedCommands;
 using GameStore.Commands.GuestCommands;
 using GameStore.Commands.Interfaces;
+using GameStore.Commands.RestrictedCommands;
 using GameStore.Exceptions;
 using MySql.Data.MySqlClient;
 
@@ -25,7 +26,7 @@ namespace GameStore
 
         public MySqlConnection Connection { get; }
 
-        public IReadOnlyCollection<string> CurrentRoles { get; set; }
+        public IReadOnlyCollection<string> CurrentRoles { get; set; } = new List<string>();
 
         public bool IsLoggedIn { get; set; }
 
@@ -82,7 +83,8 @@ namespace GameStore
                 ["Logout"] = new LogoutCommand(this),
                 ["ChangePassword"] = new ChangePasswordCommand(this),
                 ["DeleteAccount"] = new DeleteAccountCommand(this),
-                ["Deposit"] = new DepositCommand(this)
+                ["Deposit"] = new DepositCommand(this),
+                ["AddGame"] = new AddGameCommand(this)
             };
         }
 
