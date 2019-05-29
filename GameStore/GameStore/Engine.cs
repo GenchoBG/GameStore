@@ -25,6 +25,8 @@ namespace GameStore
 
         public MySqlConnection Connection { get; }
 
+        public IReadOnlyCollection<string> CurrentRoles { get; set; }
+
         public bool IsLoggedIn { get; set; }
 
         public string CurrentUsername { get; set; }
@@ -143,10 +145,10 @@ namespace GameStore
                             VALUES(1, 'Fortnite', 'A retarded game which every 9yo boy plays.', 40.20);
 
                             INSERT INTO Games(Id, Name, Description, Price) 
-                            VALUES(1, 'Overwatch', 'A very cool competitive game with many challenges and deathmatches.', 120);
+                            VALUES(2, 'Overwatch', 'A very cool competitive game with many challenges and deathmatches.', 120);
 
                             INSERT INTO Games(Id, Name, Description, Price) 
-                            VALUES(1, 'Minesweeper', 'A logical game renovated from the original minesweeper but with cooler features.', 10);
+                            VALUES(3, 'Minesweeper', 'A logical game renovated from the original minesweeper but with cooler features.', 10);
 
                             CREATE TABLE Reviews(
 	                            UserId INTEGER NOT NULL,
