@@ -86,7 +86,8 @@ namespace GameStore
                 ["Deposit"] = new DepositCommand(this),
                 ["AddGame"] = new AddGameCommand(this),
                 ["RemoveGame"] = new RemoveGameCommand(this),
-                ["UpdateName"] = new UpdateNameCommand(this)
+                ["UpdateName"] = new UpdateNameCommand(this),
+                ["UpdatePrice"] = new UpdatePriceCommand(this)
             };
         }
 
