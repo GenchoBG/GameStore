@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using GameStore.Commands.AuthenticatedCommands;
 using GameStore.Commands.GuestCommands;
@@ -28,9 +29,9 @@ namespace GameStore
 
         public IReadOnlyCollection<string> CurrentRoles { get; set; } = new List<string>();
 
-        public bool IsLoggedIn { get; set; }
+        public bool IsLoggedIn { get; set; } = true;
 
-        public string CurrentUsername { get; set; }
+        public string CurrentUsername { get; set; } = "petio333";
 
         public void Run()
         {
@@ -61,6 +62,10 @@ namespace GameStore
                 }
                 catch (GameStoreException e)
                 {
+                    if (this.Connection.State == ConnectionState.Open)
+                    {
+                        this.Connection.Close();
+                    }
                     var @default = Console.ForegroundColor;
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine(e.Message);
@@ -89,7 +94,8 @@ namespace GameStore
                 ["UpdateName"] = new UpdateNameCommand(this),
                 ["UpdatePrice"] = new UpdatePriceCommand(this),
                 ["UpdateDescription"] = new UpdateDescriptionCommand(this),
-                ["ViewGame"] = new ViewGameCommand(this)
+                ["ViewGame"] = new ViewGameCommand(this),
+                ["BuyGame"] = new BuyGameCommand(this),
             };
         }
 
@@ -126,6 +132,7 @@ namespace GameStore
                             INSERT INTO Users(Id, Username, Password, Balance) VALUES(1, 'Manager', 'manager', 100);
                             INSERT INTO Users(Id, Username, Password, Balance) VALUES(2, 'Pesho123', 'peshopesho', 0);
                             INSERT INTO Users(Id, Username, Password, Balance) VALUES(3, 'GenchoBg', 'idiot', 0);
+                            INSERT INTO Users(Id, Username, Password, Balance) VALUES(4, 'petio333', 'ferarienzo4', 0);
 
                             INSERT INTO Roles(Id, Name) VALUES(1, 'manager');
 
