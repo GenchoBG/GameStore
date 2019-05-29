@@ -84,7 +84,8 @@ namespace GameStore
                 ["ChangePassword"] = new ChangePasswordCommand(this),
                 ["DeleteAccount"] = new DeleteAccountCommand(this),
                 ["Deposit"] = new DepositCommand(this),
-                ["AddGame"] = new AddGameCommand(this)
+                ["AddGame"] = new AddGameCommand(this),
+                ["RemoveGame"] = new RemoveGameCommand(this)
             };
         }
 
@@ -138,8 +139,8 @@ namespace GameStore
                             CREATE TABLE UserGames(
 	                            UserId INTEGER NOT NULL,
 	                            GameId INTEGER NOT NULL, 
-	                            FOREIGN KEY (UserId) REFERENCES Users(Id),
-	                            FOREIGN KEY (GameId) REFERENCES Games(Id),
+	                            FOREIGN KEY (UserId) REFERENCES Users(Id) ON DELETE CASCADE,
+	                            FOREIGN KEY (GameId) REFERENCES Games(Id) ON DELETE CASCADE,
 	                            PRIMARY KEY (UserId, GameId)
                             );
 
@@ -157,8 +158,8 @@ namespace GameStore
 	                            GameId INTEGER NOT NULL,
                                 Heading VARCHAR(150) NOT NULL,
                                 Content VARCHAR(1000) NOT NULL,
-	                            FOREIGN KEY (UserId) REFERENCES Users(Id),
-	                            FOREIGN KEY (GameId) REFERENCES Games(Id),
+	                            FOREIGN KEY (UserId) REFERENCES Users(Id) ON DELETE CASCADE,
+	                            FOREIGN KEY (GameId) REFERENCES Games(Id) ON DELETE CASCADE,
 	                            PRIMARY KEY (UserId, GameId)
                             );
 
