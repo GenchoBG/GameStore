@@ -116,6 +116,7 @@ namespace GameStore
 
                             INSERT INTO Users(Id, Username, Password, Balance) VALUES(1, 'Manager', 'manager', 100);
                             INSERT INTO Users(Id, Username, Password, Balance) VALUES(2, 'Pesho123', 'peshopesho', 0);
+                            INSERT INTO Users(Id, Username, Password, Balance) VALUES(3, 'GenchoBg', 'idiot', 0);
 
                             INSERT INTO Roles(Id, Name) VALUES(1, 'manager');
 
@@ -124,7 +125,7 @@ namespace GameStore
                             CREATE TABLE Games(
 	                            Id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	                            Name VARCHAR(150) NOT NULL,
-	                            Description VARCHAR(500) NOT NULL,
+	                            Description VARCHAR(1000) NOT NULL,
                                 Price DOUBLE NOT NULL
                             );
 
@@ -136,7 +137,35 @@ namespace GameStore
 	                            FOREIGN KEY (UserId) REFERENCES Users(Id),
 	                            FOREIGN KEY (GameId) REFERENCES Games(Id),
 	                            PRIMARY KEY (UserId, GameId)
-                            );";
+                            );
+
+                            INSERT INTO Games(Id, Name, Description, Price) 
+                            VALUES(1, 'Fortnite', 'A retarded game which every 9yo boy plays.', 40.20);
+
+                            INSERT INTO Games(Id, Name, Description, Price) 
+                            VALUES(1, 'Overwatch', 'A very cool competitive game with many challenges and deathmatches.', 120);
+
+                            INSERT INTO Games(Id, Name, Description, Price) 
+                            VALUES(1, 'Minesweeper', 'A logical game renovated from the original minesweeper but with cooler features.', 10);
+
+                            CREATE TABLE Reviews(
+	                            UserId INTEGER NOT NULL,
+	                            GameId INTEGER NOT NULL,
+                                Heading VARCHAR(150) NOT NULL,
+                                Content VARCHAR(1000) NOT NULL,
+	                            FOREIGN KEY (UserId) REFERENCES Users(Id),
+	                            FOREIGN KEY (GameId) REFERENCES Games(Id),
+	                            PRIMARY KEY (UserId, GameId)
+                            );
+
+                            INSERT INTO UserGames(UserId, GameId) VALUES(2, 3);
+
+                            INSERT INTO Reviews(UserId, GameId, Heading, Content) 
+                            VALUES(2, 3, 'Simply amazing', 'No bugs found and the game is so enjoyable.');
+                            
+                            INSERT INTO Reviews(UserId, GameId, Heading, Content)
+                            VALUES(3, 1, 'The best game ever', 'I can stay home all day and play it while wasting all the time in the world.');
+                            ";
 
             using (var cmd = new MySqlCommand(query, this.Connection))
             {
