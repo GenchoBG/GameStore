@@ -36,12 +36,40 @@ namespace GameStore.Commands.AuthenticatedCommands
                 }
                 reader.Read();
 
+                var id = reader.GetInt32("Id");
                 var price = reader.GetDouble("Price");
                 var description = reader.GetString("Description");
+
+                reader.Close();
 
                 Console.WriteLine($"{game} ({price}$)");
                 Console.WriteLine(new string('-', Console.WindowWidth - 1));
                 Console.WriteLine(description);
+
+                var reviewsQuery = $"SELECT * FROM Reviews r INNER JOIN Users u ON r.UserId = u.Id WHERE r.GameId = @GameId;";
+
+                using (var reviewsCmd = new MySqlCommand(reviewsQuery, this.Engine.Connection))
+                {
+                    reviewsCmd.Parameters.AddWithValue("GameId", id);
+
+                    var reviewsReader = reviewsCmd.ExecuteReader();
+
+                    if (!reviewsReader.HasRows)
+                    {
+                        Console.WriteLine("No reviews :/");
+                    }
+
+                    while (reviewsReader.Read())
+                    {
+                        var username = reviewsReader.GetString("Username");
+                        var heading = reviewsReader.GetString("Heading");
+                        var content = reviewsReader.GetString("Content");
+
+                        Console.WriteLine();
+                        Console.WriteLine($"{heading} (By {username})");
+                        Console.WriteLine(content);
+                    }
+                }
 
                 this.Engine.Connection.Close();
             }
