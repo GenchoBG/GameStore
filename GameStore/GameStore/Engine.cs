@@ -114,14 +114,14 @@ namespace GameStore
                                 Balance DOUBLE NOT NULL
                             );
 
-                            CREATE INDEX Index_User_Username ON Users (Username);
+                            CREATE UNIQUE INDEX Index_User_Username ON Users (Username);
 
                             CREATE TABLE Roles(
 	                            Id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	                            Name VARCHAR(150) NOT NULL
                             );
 
-                            CREATE INDEX Index_Roles_Name ON Roles (Name);
+                            CREATE UNIQUE INDEX Index_Roles_Name ON Roles (Name);
 
                             CREATE TABLE UserRoles(
 	                            UserId INTEGER NOT NULL,
@@ -147,7 +147,7 @@ namespace GameStore
                                 Price DOUBLE NOT NULL
                             );
 
-                            CREATE INDEX Index_Games_Name ON Games (Name);
+                            CREATE UNIQUE INDEX Index_Games_Name ON Games (Name);
 
                             CREATE TABLE UserGames(
 	                            UserId INTEGER NOT NULL,
