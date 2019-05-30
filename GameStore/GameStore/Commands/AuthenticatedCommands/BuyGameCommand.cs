@@ -75,9 +75,11 @@ namespace GameStore.Commands.AuthenticatedCommands
                         throw new GameStoreException("Not enough money.");
                     }
 
+                    var transaction = this.Engine.Connection.BeginTransaction();
+
                     var buyQuery = "INSERT INTO UserGames(UserId, GameId) VALUES(@UserId, @GameId);";
                     
-                    using (var buyCmd = new MySqlCommand(buyQuery, this.Engine.Connection))
+                    using (var buyCmd = new MySqlCommand(buyQuery, this.Engine.Connection, transaction))
                     {
                         buyCmd.Parameters.AddWithValue("UserId", userId);
                         buyCmd.Parameters.AddWithValue("GameId", gameId);
@@ -87,12 +89,22 @@ namespace GameStore.Commands.AuthenticatedCommands
 
                     var deductBalanceQuery = "UPDATE Users SET Balance = @Value WHERE Id = @UserId;";
 
-                    using (var deductBalanceCmd = new MySqlCommand(deductBalanceQuery, this.Engine.Connection))
+                    using (var deductBalanceCmd = new MySqlCommand(deductBalanceQuery, this.Engine.Connection, transaction))
                     {
                         deductBalanceCmd.Parameters.AddWithValue("UserId", userId);
                         deductBalanceCmd.Parameters.AddWithValue("Value", balance - price);
 
                         deductBalanceCmd.ExecuteNonQuery();
+                    }
+
+                    try
+                    {
+                        transaction.Commit();
+                    }
+                    catch (Exception)
+                    {
+                        transaction.Rollback();
+                        throw new GameStoreException("Error... Please, try again.");
                     }
 
                     this.Engine.Connection.Close();
