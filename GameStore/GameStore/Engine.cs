@@ -96,6 +96,7 @@ namespace GameStore
                 ["UpdateDescription"] = new UpdateDescriptionCommand(this),
                 ["ViewGame"] = new ViewGameCommand(this),
                 ["BuyGame"] = new BuyGameCommand(this),
+                ["AddReview"] = new AddReviewCommand(this),
             };
         }
 
@@ -175,6 +176,7 @@ namespace GameStore
                             );
 
                             INSERT INTO UserGames(UserId, GameId) VALUES(2, 3);
+                            INSERT INTO UserGames(UserId, GameId) VALUES(4, 3);
 
                             INSERT INTO Reviews(UserId, GameId, Heading, Content) 
                             VALUES(2, 3, 'Simply amazing', 'No bugs found and the game is so enjoyable.');
