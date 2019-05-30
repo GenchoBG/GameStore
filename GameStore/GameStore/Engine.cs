@@ -96,8 +96,8 @@ namespace GameStore
                 ["UpdateDescription"] = new UpdateDescriptionCommand(this),
                 ["ViewGame"] = new ViewGameCommand(this),
                 ["BuyGame"] = new BuyGameCommand(this),
-                ["AddReview"] = new AddReviewCommand(this),
-            };
+				["Balance"] = new BalanceCommand(this),
+				["AddReview"] = new AddReviewCommand(this),            };
         }
 
         private void InitialSetup() //TODO: don't drop the db on every startup
