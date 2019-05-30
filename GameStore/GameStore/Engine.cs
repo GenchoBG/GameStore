@@ -96,9 +96,6 @@ namespace GameStore
                 ["UpdateDescription"] = new UpdateDescriptionCommand(this),
                 ["ViewGame"] = new ViewGameCommand(this),
                 ["BuyGame"] = new BuyGameCommand(this),
-                ["Balance"] = new BalanceCommand(this),
-                ["ListGames"] = new ListGamesCommand(this),
-            };
         }
 
         private void InitialSetup() //TODO: don't drop the db on every startup
@@ -192,6 +189,7 @@ namespace GameStore
                             );
 
                             INSERT INTO UserGames(UserId, GameId) VALUES(2, 3);
+                            INSERT INTO UserGames(UserId, GameId) VALUES(4, 3);
 
                             INSERT INTO Reviews(UserId, GameId, Heading, Content) 
                             VALUES(2, 3, 'Simply amazing', 'No bugs found and the game is so enjoyable.');
