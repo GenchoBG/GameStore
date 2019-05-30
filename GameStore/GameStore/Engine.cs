@@ -46,7 +46,7 @@ namespace GameStore
                         break;
                     }
 
-                    var args = input.Split();
+                    var args = input.Split(new char[] { }, StringSplitOptions.RemoveEmptyEntries);
 
                     var cmd = args[0];
 
@@ -97,6 +97,7 @@ namespace GameStore
                 ["ViewGame"] = new ViewGameCommand(this),
                 ["BuyGame"] = new BuyGameCommand(this),
                 ["Balance"] = new BalanceCommand(this),
+                ["ListGames"] = new ListGamesCommand(this),
             };
         }
 
@@ -164,6 +165,21 @@ namespace GameStore
 
                             INSERT INTO Games(Id, Name, Description, Price) 
                             VALUES(3, 'Minesweeper', 'A logical game renovated from the original minesweeper but with cooler features.', 10);
+
+                            INSERT INTO Games(Id, Name, Description, Price) 
+                            VALUES(4, 'Minecraft', 'Sandbox open world where you can build (friends), expore.', 20);
+
+                            INSERT INTO Games(Id, Name, Description, Price) 
+                            VALUES(5, 'CS:GO', 'Boom boom.', 6);
+
+                            INSERT INTO Games(Id, Name, Description, Price) 
+                            VALUES(6, 'Roblox', 'Minecraft equivalent of older people.', 2);
+
+                            INSERT INTO Games(Id, Name, Description, Price) 
+                            VALUES(7, 'IMVU', 'I don\'t even wanna talk about it.', 10);
+
+                            INSERT INTO Games(Id, Name, Description, Price) 
+                            VALUES(8, 'Gonenica', 'For the kids with a social life.', 0);
 
                             CREATE TABLE Reviews(
 	                            UserId INTEGER NOT NULL,
