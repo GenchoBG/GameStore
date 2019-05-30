@@ -96,6 +96,7 @@ namespace GameStore
                 ["UpdateDescription"] = new UpdateDescriptionCommand(this),
                 ["ViewGame"] = new ViewGameCommand(this),
                 ["BuyGame"] = new BuyGameCommand(this),
+                ["Balance"] = new BalanceCommand(this),
             };
         }
 
